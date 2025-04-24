@@ -1,10 +1,14 @@
-FROM php:8.4-fpm as base
+FROM php:8.4-fpm AS base
 LABEL org.opencontainers.image.source="https://github.com/nickdown/php-docker-images"
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     git unzip curl libsqlite3-dev libzip-dev zip gnupg \
     nginx nodejs npm supervisor cron
+
+RUN pecl install --onlyreqdeps --force redis \
+&& rm -rf /tmp/pear \
+&& docker-php-ext-enable redis
 
 # Symlink nodejs if necessary
 RUN [ -f /usr/bin/node ] || ln -s /usr/bin/nodejs /usr/bin/node
