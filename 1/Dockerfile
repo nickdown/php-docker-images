@@ -1,4 +1,5 @@
-FROM php:8.4-fpm
+FROM php:8.4-fpm as base
+LABEL org.opencontainers.image.source="https://github.com/nickdown/php-docker-images"
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
