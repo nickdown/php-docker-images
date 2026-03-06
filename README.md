@@ -1,3 +1,3 @@
 # PHP Docker Images
 
-Something here
+Something here.
