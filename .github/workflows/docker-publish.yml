@@ -3,6 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -27,5 +28,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./2
+          pull: true
+          no-cache: true
           push: true
-          tags: ghcr.io/nickdown/php-docker-images:2
+          tags: |
+            ghcr.io/nickdown/php-docker-images:2
+            ghcr.io/nickdown/php-docker-images:latest
